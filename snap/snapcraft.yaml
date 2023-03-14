@@ -71,7 +71,7 @@ parts:
       - libavformat-dev
       - libavutil-dev
       - libswscale-dev
-      - libavif-dev
+      #- libavif-dev
     stage-packages:
       - libepoxy0
       - libgl1
