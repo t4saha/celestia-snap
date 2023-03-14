@@ -14,7 +14,7 @@ compression: lzo
    
 apps:
   celestia-qt:
-    command: bin/desktop-launch $SNAP/bin/run-celestia-qt.sh
+    command: bin/desktop-launch $SNAP/usr/bin/celestia-qt
     plugs: [desktop, wayland, x11, unity7, gsettings, opengl, network, network-bind, audio-playback, home, raw-usb]
 
 layout:
@@ -35,7 +35,6 @@ parts:
       - -DCMAKE_INSTALL_PREFIX:PATH=/usr
       - -DENABLE_TTF=ON
       - -DUSE_QT6=ON
-      - -DENABLE_DATA=ON
     source: https://github.com/CelestiaProject/Celestia.git
     source-type: git
     after : [desktop-celestia]  
@@ -61,7 +60,6 @@ parts:
       - libqt6opengl6-dev
       - libqt6core5compat6-dev
       - liblua5.3-dev
-      - libluajit-5.1-dev
       - libfreetype6-dev
       - gettext
     stage-packages:
@@ -76,21 +74,9 @@ parts:
       - qt6-wayland
       - libqt6openglwidgets6
       - libfmt8
-      - libluajit-5.1-2
       - libtheora0
       - libcanberra-gtk3-module
       - gtk3-nocsd
-
-  wrapper:
-    plugin: dump
-    after : [celestia-qt]
-    override-pull: |
-      craftctl default
-      chmod +x $CRAFT_PART_SRC/run-celestia-qt.sh
-    source: ./snap/local
-    source-type: local
-    organize:
-      run-celestia-qt.sh: bin/run-celestia-qt.sh
       
   celestia-content:
     source: https://github.com/CelestiaProject/CelestiaContent.git
