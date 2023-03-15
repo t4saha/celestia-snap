@@ -62,6 +62,7 @@ parts:
       - libfmt-dev
       - libfreetype6-dev
       - liblua5.3-dev
+      - gettext
       #QT Dependencies
       - qt6-base-dev
       - qt6-base-dev-tools
