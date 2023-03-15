@@ -60,7 +60,7 @@ parts:
       - libglu1-mesa-dev
       - libeigen3-dev
       - libfmt-dev
-      - libfreetype6-dev/
+      - libfreetype6-dev
       - liblua5.3-dev
       #QT Dependencies
       - qt6-base-dev
