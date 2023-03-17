@@ -79,6 +79,7 @@ parts:
       - libgl1
       - libglu1-mesa
       - liblua5.3-0
+      - libfmt8
       - libqt6core5compat6
       - libqt6opengl6
       - libqt6openglwidgets6
