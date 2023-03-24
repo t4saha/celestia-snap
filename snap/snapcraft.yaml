@@ -39,7 +39,7 @@ parts:
       #- -DWITH_GTK_2_X = ON
       - -DENABLE_TTF=ON
       - -DUSE_QT6=ON
-      - -DENABLE_DATA=ON
+      #- -DENABLE_DATA=ON
     source: https://github.com/CelestiaProject/Celestia.git
     source-type: git
     #source-depth : 1
@@ -100,16 +100,6 @@ parts:
     organize:
       run-celestia-qt.sh: bin/run-celestia-qt.sh
       
-  celestia-content:
-    source: https://github.com/CelestiaProject/CelestiaContent.git
-    source-type: git
-    source-depth : 1
-    after : [desktop-celestia, celestia-qt]
-    plugin: cmake
-    cmake-parameters:
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_INSTALL_PREFIX:PATH=/usr
-      
   desktop-celestia:
     source: https://github.com/t4saha/snapcraft-desktop-helpers-Qt6.git
     source-subdir: qt
@@ -161,3 +151,8 @@ plugs:
     interface: content
     target: $SNAP/data-dir/icons
     default-provider: gtk-common-themes
+  celestia-content:
+    interface: content
+    content: celestia-qt
+    target: $SNAP/usr/share/celestia
+    default-provider: celestia-content:celestia-qt
