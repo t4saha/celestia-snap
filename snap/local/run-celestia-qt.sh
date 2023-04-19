@@ -22,4 +22,4 @@ else
     export LIBGL_DRIVERS_PATH=$SNAP/usr/lib/$ARCH/dri
 fi
 
-exec $SNAP/usr/bin/celestia-qt "$@"
+exec $SNAP/usr/bin/celestia-qt6 "$@"
