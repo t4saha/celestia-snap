@@ -37,7 +37,7 @@ parts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX:PATH=/usr
       #- -DWITH_GTK_2_X = ON
-      - -DENABLE_QT6 = ON
+      - -DENABLE_QT6=ON
       - -DENABLE_TTF=ON
       - -DUSE_QT6=ON
       - -DENABLE_DATA=ON
