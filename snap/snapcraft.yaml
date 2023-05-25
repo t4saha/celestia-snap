@@ -89,6 +89,8 @@ parts:
       - libqt6widgets6
       - libqt6core6
       - libwayland-client0
+      #Wayland
+      - qt6-wayland
       #Obsolete 
 
   wrapper:
