@@ -116,71 +116,13 @@ parts:
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX:PATH=/usr
-      
-  adwaita-qt:
-    plugin: cmake
-    cmake-parameters:
-      - -DUSE_QT6=true
-      - -DCMAKE_INSTALL_PREFIX:PATH=/usr
-    source: https://github.com/FedoraQt/adwaita-qt.git
-    source-type: git
-    #source-depth : 1
-    source-tag: 1.4.2
-    after : [desktop-celestia]  
-    build-packages:
-      - libx11-xcb-dev
-      - libx11-dev
-      - libxcb1-dev
-    build-environment:
-      - LD_LIBRARY_PATH: $CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
-      - PATH: $CRAFT_STAGE/usr/bin:$PATH
-    override-build: |
-      craftctl default
-      sed -i -E \
-      's|set\(_IMPORT_PREFIX "(.*)"\)|set\(_IMPORT_PREFIX "$CRAFT_STAGE\1"\)|' \
-      $CRAFT_PART_INSTALL/usr/lib/$CRAFT_ARCH_TRIPLET/cmake/AdwaitaQt6/AdwaitaQt6Targets.cmake
-    prime:
-      - -usr/share/doc
-      - -usr/include
-      - -usr/lib/$CRAFT_ARCH_TRIPLET/cmake
-      - -usr/lib/$CRAFT_ARCH_TRIPLET/pkgconfig
-      
-  qgnome:
-    plugin: cmake
-    cmake-parameters:
-      - -DUSE_QT6=true
-    source: https://github.com/FedoraQt/QGnomePlatform.git
-    source-type: git
-    #source-depth : 1
-    source-tag: 0.9.2
-    after : [desktop-celestia, adwaita-qt]  
-    build-packages:
-      #QT Package
-      - qt6-declarative-dev
-      - qt6-wayland-dev
-      - qt6-wayland-dev-tools
-      - qt6-base-private-dev
-      #Other Packages
-      - libgtk-3-dev
-      - gsettings-desktop-schemas-dev
-    build-environment:
-      - LD_LIBRARY_PATH: $CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
-      - PATH: $CRAFT_STAGE/usr/bin:$PATH
-    prime:
-      - -usr/share/doc
-      - -usr/lib/$CRAFT_ARCH_TRIPLET/cmake
-      - -usr/lib/$CRAFT_ARCH_TRIPLET/pkgconfig
-      
+     
   desktop-celestia:
     source: https://github.com/t4saha/snapcraft-desktop-helpers-Qt6.git
     source-subdir: qt
     source-depth : 1
     plugin: make
     make-parameters: ["FLAVOR=qt6"]
-    override-build: |    
-      add-apt-repository ppa:savoury1/qt-6-2 -y
-      apt update
-      craftctl default
     build-packages:
       - build-essential
       - qt6-base-dev
