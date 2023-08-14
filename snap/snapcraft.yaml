@@ -19,6 +19,9 @@ apps:
     command: bin/desktop-launch $SNAP/bin/run-celestia-qt.sh
     #desktop: $SNAP/usr/share/applications/celestia.desktop
     plugs: [desktop, wayland, x11, unity7, gsettings, opengl, network, network-bind, audio-playback, home, raw-usb]
+    environment:
+      HOME: "$SNAP_USER_COMMON"
+      QT_QPA_PLATFORMTHEME='gnome' # gtk3 is very slow and buggy
     
 layout:
   /usr/share/celestia:
@@ -46,7 +49,7 @@ parts:
     source-type: git
     #source-depth : 1
     #source-tag: 1.6.2
-    after : [desktop-celestia]   
+    after : [desktop-celestia, qgnome]   
     override-pull: |  
       craftctl default
       craftctl set version=$(git describe --tags | awk '{ gsub("_","."); print $1 }')
@@ -114,12 +117,49 @@ parts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX:PATH=/usr
       
+  adwaita-qt:
+    plugin: cmake
+    cmake-parameters:
+      - -DUSE_QT6=true
+    source: https://github.com/FedoraQt/adwaita-qt.git
+    source-type: git
+    #source-depth : 1
+    source-tag: 1.4.2
+    after : [desktop-celestia]  
+    build-packages:
+      - libx11-xcb-dev
+      - libx11-dev
+      - libxcb1-dev
+      
+  qgnome:
+    plugin: cmake
+    cmake-parameters:
+      - -DUSE_QT6=true
+    source: https://github.com/FedoraQt/QGnomePlatform.git
+    source-type: git
+    source-depth : 1
+    #source-tag: 1.4.2
+    after : [desktop-celestia, adwaita-qt]  
+    build-packages:
+      #QT Package
+      - qt6-declarative-dev
+      - qt6-wayland-dev
+      - qt6-wayland-dev-tools
+      - qt6-base-private-dev
+      #Other Packages
+      - libgtk-3-dev
+      - gsettings-desktop-schemas-dev
+      
   desktop-celestia:
     source: https://github.com/t4saha/snapcraft-desktop-helpers-Qt6.git
     source-subdir: qt
     source-depth : 1
     plugin: make
     make-parameters: ["FLAVOR=qt6"]
+    override-build: |    
+      add-apt-repository ppa:savoury1/qt-6-2 -y
+      apt update
+      craftctl default
     build-packages:
       - build-essential
       - qt6-base-dev
