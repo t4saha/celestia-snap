@@ -163,10 +163,10 @@ parts:
       #Other Packages
       - libgtk-3-dev
       - gsettings-desktop-schemas-dev
-      build-environment:
+    build-environment:
       - LD_LIBRARY_PATH: $CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
       - PATH: $CRAFT_STAGE/usr/bin:$PATH
-      prime:
+    prime:
       - -usr/share/doc
       - -usr/lib/$CRAFT_ARCH_TRIPLET/cmake
       - -usr/lib/$CRAFT_ARCH_TRIPLET/pkgconfig
