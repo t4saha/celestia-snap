@@ -134,12 +134,12 @@ parts:
     build-environment:
       - LD_LIBRARY_PATH: $CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
       - PATH: $CRAFT_STAGE/usr/bin:$PATH
-      override-build: |
-        craftctl default
-        sed -i -E \
-          's|set\(_IMPORT_PREFIX "(.*)"\)|set\(_IMPORT_PREFIX "$CRAFT_STAGE\1"\)|' \
-          $CRAFT_PART_INSTALL/usr/lib/$CRAFT_ARCH_TRIPLET/cmake/AdwaitaQt/AdwaitaQt6Targets.cmake
-      prime:
+    override-build: |
+      craftctl default
+      sed -i -E \
+        's|set\(_IMPORT_PREFIX "(.*)"\)|set\(_IMPORT_PREFIX "$CRAFT_STAGE\1"\)|' \
+        $CRAFT_PART_INSTALL/usr/lib/$CRAFT_ARCH_TRIPLET/cmake/AdwaitaQt/AdwaitaQt6Targets.cmake
+    prime:
       - -usr/share/doc
       - -usr/include
       - -usr/lib/$CRAFT_ARCH_TRIPLET/cmake
