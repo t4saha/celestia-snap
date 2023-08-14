@@ -131,6 +131,19 @@ parts:
       - libx11-xcb-dev
       - libx11-dev
       - libxcb1-dev
+    build-environment:
+      - LD_LIBRARY_PATH: $CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+      - PATH: $CRAFT_STAGE/usr/bin:$PATH
+      override-build: |
+        craftctl default
+        sed -i -E \
+          's|set\(_IMPORT_PREFIX "(.*)"\)|set\(_IMPORT_PREFIX "$CRAFT_STAGE\1"\)|' \
+          $CRAFT_PART_INSTALL/usr/lib/$CRAFT_ARCH_TRIPLET/cmake/AdwaitaQt/AdwaitaQt6Targets.cmake
+      prime:
+      - -usr/share/doc
+      - -usr/include
+      - -usr/lib/$CRAFT_ARCH_TRIPLET/cmake
+      - -usr/lib/$CRAFT_ARCH_TRIPLET/pkgconfig
       
   qgnome:
     plugin: cmake
@@ -138,8 +151,8 @@ parts:
       - -DUSE_QT6=true
     source: https://github.com/FedoraQt/QGnomePlatform.git
     source-type: git
-    source-depth : 1
-    #source-tag: 1.4.2
+    #source-depth : 1
+    source-tag: 0.9.2
     after : [desktop-celestia, adwaita-qt]  
     build-packages:
       #QT Package
@@ -150,8 +163,13 @@ parts:
       #Other Packages
       - libgtk-3-dev
       - gsettings-desktop-schemas-dev
-    build-environment:
-      - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+      build-environment:
+      - LD_LIBRARY_PATH: $CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
+      - PATH: $CRAFT_STAGE/usr/bin:$PATH
+      prime:
+      - -usr/share/doc
+      - -usr/lib/$CRAFT_ARCH_TRIPLET/cmake
+      - -usr/lib/$CRAFT_ARCH_TRIPLET/pkgconfig
       
   desktop-celestia:
     source: https://github.com/t4saha/snapcraft-desktop-helpers-Qt6.git
