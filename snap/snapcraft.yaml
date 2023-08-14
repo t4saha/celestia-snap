@@ -121,6 +121,7 @@ parts:
     plugin: cmake
     cmake-parameters:
       - -DUSE_QT6=true
+      - -DCMAKE_INSTALL_PREFIX:PATH=/usr
     source: https://github.com/FedoraQt/adwaita-qt.git
     source-type: git
     #source-depth : 1
