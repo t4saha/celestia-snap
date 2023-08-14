@@ -150,6 +150,8 @@ parts:
       #Other Packages
       - libgtk-3-dev
       - gsettings-desktop-schemas-dev
+    build-environment:
+      - LD_LIBRARY_PATH: $SNAPCRAFT_STAGE/usr/lib/$SNAPCRAFT_ARCH_TRIPLET:$LD_LIBRARY_PATH
       
   desktop-celestia:
     source: https://github.com/t4saha/snapcraft-desktop-helpers-Qt6.git
