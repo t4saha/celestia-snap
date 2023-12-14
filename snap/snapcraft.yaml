@@ -68,6 +68,10 @@ parts:
       - libfreetype6-dev
       - liblua5.3-dev
       - gettext
+      - gperf
+      #meshoptimizer package
+      - gltfpack
+      - libmeshoptimizer-dev
       #QT Dependencies
       - qt6-base-dev
       - qt6-base-dev-tools
