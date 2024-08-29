@@ -69,6 +69,7 @@ parts:
       - liblua5.3-dev
       - gettext
       - gperf
+      - libboost-all-dev
       #meshoptimizer package
       - gltfpack
       - libmeshoptimizer-dev
