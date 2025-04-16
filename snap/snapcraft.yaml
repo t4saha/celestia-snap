@@ -70,6 +70,7 @@ parts:
       - gettext
       - gperf
       - libboost-all-dev
+      - imagemagick
       #meshoptimizer package
       - gltfpack
       - libmeshoptimizer-dev
