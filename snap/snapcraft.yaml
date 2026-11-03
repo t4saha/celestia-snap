@@ -56,7 +56,7 @@ parts:
     override-build: |    
       craftctl default
       mkdir -p $CRAFT_PART_INSTALL/usr/share/icons/hicolor/128x128/apps
-      cp ../src/src/celestia/qt/data/celestia.png $CRAFT_PART_INSTALL/usr/share/icons/hicolor/128x128/apps    
+      cp $CRAFT_PART_INSTALL/usr/share/pixmaps/celestia.png $CRAFT_PART_INSTALL/usr/share/icons/hicolor/128x128/apps    
     build-packages:
       - libepoxy-dev
       - libjpeg-dev
